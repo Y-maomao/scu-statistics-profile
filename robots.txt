@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://y-maomao.github.io/scu-statistics-profile/sitemap.xml
