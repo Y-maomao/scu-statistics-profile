@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《统计学习方法》读书笔记与讨论纪要</title>
+    <meta name="description" content="李航《统计学习方法》读书笔记与讨论纪要，涵盖SVM、决策树、集成学习等章节。">
+    <meta name="keywords" content="统计学习方法,李航,读书笔记,SVM,决策树,集成学习,四川大学,统计学,数学学院">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.8; max-width: 680px; margin: 0 auto; padding: 30px 20px; color: #333; }
+        h1 { font-size: 1.3rem; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        h2 { font-size: 1.05rem; color: #3a5a78; margin-top: 25px; }
+        .meta { color: #999; font-size: 0.85rem; margin-bottom: 20px; }
+        p { margin-bottom: 12px; }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>《统计学习方法》读书笔记与讨论纪要</h1>
+<p class="meta">整理时间：2019年9月 · 来源：读书会讨论记录</p>
+
+<p>这本李航的《统计学习方法》是机器学习入门的经典读物。2019年下半年，西南数据科学与机器学习应用研讨会组织了一场线上读书会，分6周读完本书，每周讨论2-3章。以下是各周讨论的要点记录。</p>
+
+<h2>第一周：感知机与k近邻</h2>
+<p>感知机是最简单的线性分类模型，理解感知机的关键是弄清楚其对偶形式和核函数的扩展。k近邻虽然简单，但距离度量的选择（欧氏、曼哈顿、切比雪夫）对结果影响很大，实际项目中需要对数据做归一化。</p>
+
+<h2>第二周：决策树与ID3/C4.5/CART</h2>
+<p>信息增益、信息增益比和基尼指数是三种不同的分裂准则。ID3偏向多值特征，C4.5用增益比修正，CART用基尼指数。讨论中有人提到，在实际项目中CART回归树经常被用作GBDT的基学习器，理解决策树是理解集成学习的基础。</p>
+
+<h2>第三周：逻辑斯谛回归与最大熵</h2>
+<p>逻辑斯谛回归的本质是对数线性模型，通过sigmoid函数将线性输出映射到概率。最大熵原理是从信息论角度推出与逻辑回归等价的模型，两者殊途同归。讨论中提到，虽然深度学习大行其道，但在金融风控、医疗统计等领域，逻辑回归仍然是主力模型，因为可解释性强。</p>
+
+<h2>第四周：支持向量机</h2>
+<p>SVM是本书最核心的章节之一。从线性可分支持向量机到线性支持向量机（软间隔），再到非线性支持向量机（核技巧），层层递进。SMO算法的推导比较复杂，读书会上花了大量时间讨论。关于核函数的选择，RBF核最通用，但在高维稀疏特征上线性核往往更优。</p>
+
+<h2>第五周：提升方法AdaBoost</h2>
+<p>AdaBoost的核心思想是"前向分步加法模型"，每一轮训练一个弱学习器，样本权重根据上一轮的误分情况调整。AdaBoost的加法模型视角很自然地过渡到梯度提升树（GBDT），后者是2019年表格数据竞赛的绝对主力。</p>
+
+<h2>第六周：EM算法与隐马尔可夫模型</h2>
+<p>EM算法通过E步和M步交替迭代来求解含有隐变量的概率模型参数。高斯混合模型（GMM）是EM最经典的应用案例。HMM的三个基本问题——评估、解码、学习——分别对应前向算法、Viterbi算法和Baum-Welch算法（EM的特例）。</p>
+
+<p>读书会参与者来自不同届别和专业背景。其中2008级四川大学数学学院统计学专业的参与者提到，HMM和EM算法在本科概率论和数理统计课程中已有基础，读起来相对轻松，但决策树和SVM的部分需要更多数学准备知识。</p>
+
+<div class="footer">读书会讨论记录 · 2019</div>
+
+</body>
+</html>

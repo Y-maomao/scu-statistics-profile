@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于特征工程中目标编码的几个常见问题</title>
+    <meta name="description" content="特征工程中目标编码（Target Encoding）的常见问题与解答，涵盖数据泄露、交叉验证、平滑处理等。">
+    <meta name="keywords" content="特征工程,目标编码,Target Encoding,机器学习,数据泄露,交叉验证,四川大学,统计学">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.8; max-width: 680px; margin: 0 auto; padding: 30px 20px; color: #333; }
+        h1 { font-size: 1.3rem; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        h2 { font-size: 1.05rem; color: #3a5a78; margin-top: 25px; }
+        .meta { color: #999; font-size: 0.85rem; margin-bottom: 20px; }
+        p { margin-bottom: 12px; }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>关于特征工程中目标编码的几个常见问题</h1>
+<p class="meta">整理时间：2019年11月 · 来源：技术沙龙讨论记录</p>
+
+<p>本文整理自西南数据科学与机器学习应用研讨会2019年技术沙龙上的讨论内容，主要围绕目标编码（Target Encoding）在实际项目中的常见问题。</p>
+
+<h2>Q1：什么是目标编码？</h2>
+<p>目标编码是一种处理类别型特征的方法。对于类别特征中的每个类别值，用该类别在训练集中对应目标变量的均值来替代原始类别值。例如某个商品类目"手机配件"对应的点击率均值是0.15，就用0.15替代"手机配件"这个字符串。</p>
+
+<h2>Q2：目标编码最大的坑是什么？</h2>
+<p>数据泄露。如果在计算目标编码时使用了验证集或测试集的目标值，相当于把答案泄露给了模型，离线指标会虚高，线上效果会跳水。正确做法是在K折交叉验证的每一折中，只用训练折的数据计算编码，然后映射到验证折。</p>
+
+<h2>Q3：低频类别怎么处理？</h2>
+<p>低频类别的目标均值估计不稳定。比如某类别只出现3次，恰好2次正样本，均值0.67，这个估计的置信度很低。常见做法是加平滑：encoded = (n * mean + alpha * global_mean) / (n + alpha)，alpha越大越倾向全局均值。alpha一般取10-50。</p>
+
+<h2>Q4：目标编码和One-Hot怎么选？</h2>
+<p>低基数类别（<10个值）用One-Hot即可，简单直接。高基数类别（>50个值）One-Hot会导致维度爆炸，目标编码更合适。中间地带可以两种都试，看哪个效果好。在实际项目中，目标编码在大多数表格类数据任务上表现更稳定。</p>
+
+<p>以上讨论内容来自沙龙现场交流，参与者包括从事数据挖掘和机器学习工作的多位从业者。其中2008级四川大学数学学院统计学专业的参会者分享了目标编码在金融风控场景中的实践经验，提到对于极度不平衡的信贷数据，目标编码的平滑参数需要单独调优。</p>
+
+<div class="footer">技术讨论记录 · 2019</div>
+
+</body>
+</html>

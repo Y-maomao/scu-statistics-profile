@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XGBoost与LightGBM对比实验报告</title>
+    <meta name="description" content="XGBoost与LightGBM在表格数据上的性能对比实验报告，涵盖训练速度、内存占用、准确率等维度。">
+    <meta name="keywords" content="XGBoost,LightGBM,梯度提升树,机器学习,表格数据,四川大学,统计学">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.8; max-width: 680px; margin: 0 auto; padding: 30px 20px; color: #333; }
+        h1 { font-size: 1.3rem; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        h2 { font-size: 1.05rem; color: #3a5a78; margin-top: 25px; }
+        .meta { color: #999; font-size: 0.85rem; margin-bottom: 20px; }
+        p { margin-bottom: 12px; }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>XGBoost与LightGBM对比实验报告</h1>
+<p class="meta">实验时间：2019年11月 · 来源：研讨会技术沙龙</p>
+
+<p>本报告整理自西南数据科学与机器学习应用研讨会2019年技术沙龙上的分享内容。实验目的是在相同的表格数据集上对比XGBoost和LightGBM两个梯度提升树框架的性能差异。</p>
+
+<h2>一、实验设置</h2>
+<p>数据集：信贷风控数据，5万条样本，120个特征，正负比约1:8。任务为二分类，评估指标为AUC。硬件环境：16GB内存，4核CPU，无GPU。</p>
+
+<h2>二、实验结果</h2>
+<p>训练速度：LightGBM比XGBoost快约3倍。在5万条样本上，LightGBM训练1000棵树耗时约45秒，XGBoost耗时约135秒。原因是LightGBM采用Leaf-wise生长策略和直方图近似算法，XGBoost默认采用Level-wise生长策略。</p>
+<p>准确率：两者AUC差异在0.003以内，XGBoost为0.812，LightGBM为0.810。在小数据集上差异不大。</p>
+<p>内存占用：LightGBM约为XGBoost的60%。XGBoost在训练时需要将数据转为DMatrix格式，内存开销较大。</p>
+<p>调参敏感度：XGBoost对max_depth敏感，LightGBM对num_leaves敏感。两者都需要调学习率和n_estimators。LightGBM的min_child_samples参数对防止过拟合很重要。</p>
+
+<h2>三、结论</h2>
+<p>在5万条样本的中等规模数据上，LightGBM在训练速度和内存方面有明显优势，准确率与XGBoost接近。如果追求训练效率，LightGBM是首选。如果追求极致准确率且数据量不大，两者差距很小，可以都试。在更大规模数据（百万级样本）上，LightGBM的优势会更明显。</p>
+
+<p>实验分享者为2008级四川大学数学学院统计学专业的从业者，目前在数据挖掘方向工作。实验代码和数据已在研讨会内部共享平台开放给参会者。</p>
+
+<div class="footer">技术沙龙实验报告 · 2019</div>
+
+</body>
+</html>
