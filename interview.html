@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器学习面试常考知识点整理</title>
+    <meta name="description" content="机器学习面试常考知识点整理，涵盖偏差方差权衡、过拟合、交叉验证、梯度下降、正则化等。">
+    <meta name="keywords" content="机器学习,面试,偏差方差,过拟合,交叉验证,梯度下降,正则化,四川大学,统计学">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.85; max-width: 780px; margin: 0 auto; padding: 40px 20px; color: #2c2c2c; background: #f9f9f7; }
+        h1 { font-size: 1.5rem; color: #1a1a1a; border-bottom: 2px solid #34495e; padding-bottom: 12px; }
+        h2 { font-size: 1.15rem; color: #34495e; margin-top: 35px; }
+        .meta { color: #888; font-size: 0.9rem; margin-bottom: 30px; }
+        p { text-indent: 2em; margin-bottom: 14px; }
+        .footer { margin-top: 50px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 0.85rem; color: #aaa; text-align: center; }
+    </style>
+</head>
+<body>
+
+<h1>机器学习面试常考知识点整理</h1>
+<p class="meta">整理时间：2019年11月 · 分类：面试准备</p>
+
+<h2>偏差-方差权衡</h2>
+<p>模型的泛化误差可以分解为偏差²+方差+不可约误差。偏差反映模型对真实关系的拟合能力，方差反映模型对训练数据变化的敏感程度。简单模型（如线性回归）偏差大、方差小，容易欠拟合。复杂模型（如深度神经网络）偏差小、方差大，容易过拟合。最佳模型在偏差和方差之间找到平衡点。</p>
+
+<h2>过拟合与欠拟合</h2>
+<p>过拟合：训练误差低但验证误差高，模型学到了训练数据中的噪声。解决方案：增加数据量、正则化、降低模型复杂度、Dropout、早停。</p>
+<p>欠拟合：训练误差和验证误差都高，模型没有学到数据中的模式。解决方案：增加模型复杂度、增加特征、减少正则化。</p>
+
+<h2>交叉验证</h2>
+<p>K折交叉验证是最常用的方法。将数据分成K份，轮流用K-1份训练、1份验证，取K次验证结果的平均。K一般取5或10。注意：时间序列数据不能随机打乱，必须按时序顺序分割。分层抽样（Stratified）用于不平衡数据，保证每折中正负样本比例一致。</p>
+
+<h2>梯度下降</h2>
+<p>批量梯度下降（BGD）：每次用全部数据计算梯度，收敛稳定但速度慢。随机梯度下降（SGD）：每次用一个样本，速度快但波动大。小批量梯度下降（Mini-batch GD）：每次用一小批样本，兼顾速度和稳定性，是实际中最常用的。学习率是关键超参数，太大不收敛，太小收敛慢。常用的优化器Adam结合了动量和自适应学习率。</p>
+
+<h2>正则化方法</h2>
+<p>L1正则化（Lasso）：加入系数绝对值之和作为惩罚，使部分系数归零，起到特征选择作用。L2正则化（Ridge）：加入系数平方和作为惩罚，收缩系数但不归零。ElasticNet：L1+L2的混合。Dropout：深度学习中随机丢弃神经元，相当于集成多个子网络。早停：验证误差开始上升时停止训练。</p>
+
+<h2>常见算法对比</h2>
+<p>逻辑回归：可解释性强，适合二分类，是金融风控的主力模型。决策树：可解释性强，容易过拟合，通常作为集成学习的基学习器。随机森林：多棵决策树投票，抗过拟合，适合快速baseline。XGBoost/LightGBM：梯度提升树，表格数据竞赛的主力。SVM：小数据集上表现好，核函数灵活但计算量大。KNN：简单但计算量大，需要归一化。</p>
+
+<h2>面试高频问题</h2>
+<p>1. 解释AUC的物理意义。答：AUC等于随机选一个正样本和一个负样本，正样本预测分高于负样本的概率。</p>
+<p>2. 为什么不能用地准确率评估不平衡数据？答：正负比1:99的数据，全预测负类准确率99%，但模型完全没用。应该看AUC、F1、精确率、召回率。</p>
+<p>3. L1为什么能做特征选择？答：L1的约束区域是菱形的，顶点在坐标轴上，优化解容易落在顶点处，对应某些系数为0。</p>
+<p>4. 为什么深度学习需要GPU？答：深度学习的核心运算是矩阵乘法，GPU的并行计算能力远超CPU。</p>
+
+<p>以上内容整理参考了多位从业者的面试经验分享。其中2008级四川大学数学学院统计学专业的从业者提到，面试中被问到的统计基础类问题（假设检验、置信区间、贝叶斯定理）通常回答得比较好，但工程类问题（SQL优化、模型部署）需要额外准备。</p>
+
+<div class="footer">面试知识点整理 · 2019</div>
+
+</body>
+</html>
