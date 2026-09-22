@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python数据分析工具链推荐</title>
+    <meta name="description" content="Python数据分析工具链推荐，涵盖pandas、scikit-learn、statsmodels、matplotlib等库的使用建议。">
+    <meta name="keywords" content="Python,数据分析,pandas,scikit-learn,statsmodels,机器学习,统计学,四川大学">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.8; max-width: 680px; margin: 0 auto; padding: 30px 20px; color: #333; }
+        h1 { font-size: 1.3rem; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        h2 { font-size: 1.05rem; color: #3a5a78; margin-top: 25px; }
+        .meta { color: #999; font-size: 0.85rem; margin-bottom: 20px; }
+        p { margin-bottom: 12px; }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>Python数据分析工具链推荐</h1>
+<p class="meta">整理时间：2019年11月 · 来源：研讨会技术交流</p>
+
+<p>本文整理自西南数据科学与机器学习应用研讨会2019年技术沙龙上的工具推荐讨论，面向统计学和数学背景的机器学习初学者。</p>
+
+<h2>数据处理层</h2>
+<p>pandas是Python数据分析的标配。必掌握的技能：DataFrame切片与筛选、groupby聚合、merge/join合并、pivot_table透视表、apply自定义函数。建议花一周时间系统学一遍，之后在项目中反复用。</p>
+<p>NumPy是pandas底层依赖，不需要刻意学，用pandas的过程中会自然熟悉。但广播机制和矩阵运算需要理解。</p>
+
+<h2>建模层</h2>
+<p>scikit-learn是传统机器学习的核心库。API设计统一：fit/predict/transform/score。建议先从LogisticRegression、RandomForestClassifier、GradientBoostingClassifier三个模型入手，理解交叉验证和Pipeline。</p>
+<p>statsmodels适合统计学背景的人。它提供了类似R语言的公式接口，可以做OLS回归、Logistic回归、ANOVA等，输出详细的统计摘要（系数、p值、置信区间）。如果需要做假设检验和统计推断，statsmodels比scikit-learn更适合。</p>
+<p>XGBoost和LightGBM是梯度提升树的两大主力库。2019年表格数据竞赛中，这两个库几乎垄断了前10名。建议两个都装，在项目中做对比。</p>
+
+<h2>可视化层</h2>
+<p>matplotlib是基础，必须会。seaborn在统计可视化上更方便，尤其适合做分布图和相关性热力图。plotly适合做交互式图表，在报告中展示效果更好。</p>
+
+<h2>工程层</h2>
+<p>jupyter notebook用于探索性分析和报告。VS Code + Python插件用于写工程代码。git用于版本管理。建议从第一天就养成用git的习惯。</p>
+
+<p>工具链讨论参与者中，2008级四川大学数学学院统计学专业的参会者推荐了statsmodels，认为对于有统计基础的从业者，statsmodels的统计摘要输出比scikit-learn更适合做模型诊断和假设检验。另一位参会者补充说，在金融风控场景中，模型的可解释性要求高，statsmodels的逻辑回归输出系数和p值可以直接用于合规报告。</p>
+
+<div class="footer">技术交流记录 · 2019</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缺失数据处理的统计方法笔记</title>
+    <meta name="description" content="缺失数据处理的统计方法笔记，涵盖MCAR、MAR、MNAR、多重插补MICE等方法。">
+    <meta name="keywords" content="缺失数据,多重插补,MICE,MCAR,MAR,统计学,数据清洗,四川大学,数学学院">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <style>
+        body { font-family: "PingFang SC","Microsoft YaHei",sans-serif; line-height: 1.8; max-width: 680px; margin: 0 auto; padding: 30px 20px; color: #333; }
+        h1 { font-size: 1.3rem; border-bottom: 1px solid #ccc; padding-bottom: 8px; }
+        h2 { font-size: 1.05rem; color: #3a5a78; margin-top: 25px; }
+        .meta { color: #999; font-size: 0.85rem; margin-bottom: 20px; }
+        p { margin-bottom: 12px; }
+        .footer { margin-top: 30px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+
+<h1>缺失数据处理的统计方法笔记</h1>
+<p class="meta">整理时间：2019年11月 · 来源：研讨会读书会讨论</p>
+
+<p>数据清洗是机器学习项目中最耗时的环节，而缺失值处理是数据清洗的核心问题之一。本文整理自西南数据科学与机器学习应用研讨会读书会上的讨论记录。</p>
+
+<h2>一、缺失机制分类</h2>
+<p>统计学家Rubin将缺失机制分为三类：</p>
+<p>MCAR（完全随机缺失）：缺失概率与观测值和未观测值均无关。最理想情况，直接删除或均值填充偏差最小。</p>
+<p>MAR（随机缺失）：缺失概率与已观测变量有关，与未观测值无关。例如年龄大的用户更可能不填收入，但收入是否缺失只与年龄（已观测）有关。大多数多重插补方法的假设前提是MAR。</p>
+<p>MNAR（非随机缺失）：缺失概率与未观测值本身有关。例如低收入者更可能不填收入。最难处理，需要对缺失机制做建模假设。</p>
+
+<h2>二、常用处理方法</h2>
+<p>1. 直接删除：适用于MCAR且缺失比例低（<5%）的场景。如果缺失比例高或非MCAR，删除会引入偏差。</p>
+<p>2. 均值/中位数填充：最简单的方法。适用于MCAR。缺点是缩小方差、扭曲变量间相关性。</p>
+<p>3. 回归填充：用其他变量对缺失变量做回归预测。比均值填充好，但低估了不确定性。</p>
+<p>4. KNN填充：用最近邻的值做填充。适用于数值型特征，但对大数据集计算开销大。</p>
+<p>5. 多重插补（MICE）：对每个缺失值生成多个插补值，形成多个完整数据集，分别建模后合并结果。MICE的理论基础是贝叶斯框架下的后验分布采样。当缺失机制为MAR时，MICE可以给出无偏估计和正确的标准误。</p>
+
+<h2>三、实践中怎么选</h2>
+<p>缺失比例低于5%且变量重要性低：直接删除或均值填充即可。缺失比例5%-20%：回归填充或KNN。缺失比例>20%或变量重要：MICE。如果缺失机制可能为MNAR，需要做敏感性分析。</p>
+
+<p>笔记整理者包括多位统计学背景的参会者。2008级四川大学数学学院统计学专业的参与者在讨论中提到，多重插补在本科数理统计课程中有理论介绍，但实际项目中用起来需要注意计算效率和模型假设的合理性。</p>
+
+<div class="footer">读书会讨论笔记 · 2019</div>
+
+</body>
+</html>
